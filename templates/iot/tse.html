@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TSE Control System{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 150px;
+            height: 90%;
+            top: 60px;
+            left: -2px;
+            /* background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 50%); */
+            background-color: #3273a1;
+            padding-top: 2px;
+            color: white;
+            border-right: 3px solid rgba(173, 216, 230, 0.6);
+        }
+
+        .module-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 98%);
+            color: rgb(238, 238, 255);
+            padding-left: 15px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border-bottom: 0.2px solid black;
+            position: relative;
+            font-style: Roboto Mono;
+        }
+
+        .module-button:hover {
+            background-color: #005fa3;
+        }
+
+        .submodule-container {
+            display: none;
+            background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 98%);
+        }
+
+        .submodule-button {
+            width: 100%;
+            /* background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 98%); */
+            background-color: rgba(0, 99, 132, 0.6);
+            color: white;
+            padding-left: 32px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            font-weight: 600;
+            border: none;
+            outline: none;
+            font-size: 12px;
+            margin-bottom: 0px;
+            text-align: left;
+            cursor: pointer;
+            border-bottom: 1px solid black;
+        }
+
+        .submodule-button:hover {
+            background-color: #005fa3;
+        }
+
+        .content {
+            margin-left: 160px;
+            padding: 20px;
+        }
+
+        .fa-house,
+        .fa-building,
+        .fa-triangle-exclamation,
+        .fa-gear,
+        .fa-file {
+            font-size: 11px;
+            padding-right: 7px;
+        }
+
+        .active {
+            background-color: #003e6d;
+            /* Darker background for the active button */
+        }
+
+        .title-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 98%);
+            /* background:linear-gradient(#000000 0%, #1E40AF 98%); */
+            /* background: linear-gradient(135deg, , ); */
+            background-color: #005fa3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* Add this line */
+            padding: 0 20px;
+            border-bottom: 3px solid rgba(173, 216, 230, 0.6);
+        }
+
+        /* Remove 'left' positioning and let flexbox handle the alignment */
+        .user-profile {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .company-logo {
+            margin-top: 8px;
+            height: 40px;
+            width: 40px;
+            margin-left: 28px;
+            background-color: white;
+            border-radius: 50px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        /* .right-section {
+            font-size: 16px;
+            padding-left: 1030px;
+        } */
+
+        .left-section {
+            display: flex;
+            border-right: 2px solid rgba(173, 216, 230, 0.6);
+            top: 0px;
+            padding-right: 60px;
+            width: fit-content;
+            height: 60px;
+        }
+
+
+        .profile-icon {
+            font-size: 18px;
+            /* Adjust font size for the initial */
+            color: #333;
+            background-color: #fff;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: fixed;
+            top: 61px;
+            /* Adjusts the dropdown below the profile icon */
+            left: 96%;
+            transform: translateX(-50%);
+            /* Centers the dropdown below the profile icon */
+            background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 98%);
+            min-width: 130px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .profile-dropdown a {
+            color: white;
+            text-align: center;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #005fa3;
+        }
+
+        /* Container for profile icon and tooltip */
+        .profile-icon-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: auto;
+            background:linear-gradient(rgba(0, 51, 102, 0.9) 0%, rgba(173, 216, 230, 0.6) 98%);
+            color: #fff;
+            text-align: center;
+            padding: 5px 8px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 110%;
+            /* Position above the profile icon */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-icon-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="sidebar">
+        <button id="home" class="module-button" onclick="window.location.href='http://127.0.0.1:7000/dashboard'">
+            <i class="fa-solid fa-house"></i> Home
+        </button>
+        <div id="homeSubmodules" class="submodule-container"></div>
+
+        <button id="departments" class="module-button" onclick="toggleSubmodules('departmentsSubmodules', this)">
+            <i class="fa-solid fa-building"></i> Departments
+        </button>
+        <div id="departmentsSubmodules" class="submodule-container"></div>
+
+        <button id="alarms" class="module-button" onclick="toggleSubmodules('alarmsSubmodules', this)">
+            <i class="fa-solid fa-triangle-exclamation"></i> Alarms
+        </button>
+        <div id="alarmsSubmodules" class="submodule-container"></div>
+
+        <!-- Conditionally render Settings button based on user role -->
+        {% if session['role'] == 'admin' %}
+        <button id="settings" class="module-button" onclick="toggleSubmodules('settingsSubmodules', this)">
+            <i class="fa-solid fa-gear"></i> Settings
+        </button>
+        <div id="settingsSubmodules" class="submodule-container"></div>
+        {% endif %}
+
+        <div class="profile-dropdown" id="profileDropdown">
+            {% if session['role'] == 'admin' %}
+            <!-- <a href="/add-admin"><i class="fa-solid fa-plus" style="font-size: 13px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Admin</a>
+            <a href="/add-user"><i class="fa-solid fa-plus" style="font-size: 13px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User</i></a> -->
+            <a href="/addadmin">Add Admin</a>
+            <a href="/adduser">Add User</a>
+            {% endif %}
+            <a href="/logout">Logout</a>
+        </div>
+
+        <button id="reports" class="module-button" onclick="toggleSubmodules('reportsSubmodules', this)">
+            <i class="fa-solid fa-file"></i> Analytics
+        </button>
+        <div id="reportsSubmodules" class="submodule-container"></div>
+    </div>
+
+
+    <div class="title-bar">
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/LOGO.png') }}" alt="Company Logo" class="company-logo">
+        </div>
+        <div class="company-name">
+            <span>TSE Control System</span>
+        </div>
+        <div class="user-profile" onclick="toggleProfileDropdown()">
+            <div class="profile-icon-container">
+                <div class="profile-icon" id="profileIcon"></div>
+                <span class="tooltip-text" id="usernameTooltip">{{ session['username'] }}</span>
+            </div>
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        {% block content %}
+        <!-- Default content (if any) -->
+        {% endblock %}
+    </div>
+
+    <div>
+        <iframe id="reportIframe" src="http://127.0.0.1:5001/report"
+            style="position: fixed; top: 60px; left: 150px; border: none; display: none; transform: scale(0.5); transform-origin: 0 0;"></iframe>
+    </div>       
+
+    <div>
+        <iframe id="trendsIframe" src="http://localhost:3000"
+            style="position: fixed; top: 65px; left: 145px; width: 89%; height: 90%; border: none; display: none;"></iframe>
+    </div>
+
+    <script>
+        var iframe = document.getElementById('reportIframe');
+        iframe.style.display = 'none';
+
+        var iframe = document.getElementById('trendsIframe');
+        iframe.style.display = 'none';
+
+        function toggleSubmodules(submoduleId, buttonElement) {
+            var dropdowns = document.querySelectorAll('.submodule-container');
+
+            dropdowns.forEach(function (dropdown) {
+                if (dropdown.id !== submoduleId) {
+                    dropdown.style.display = 'none';
+                    var btn = dropdown.previousElementSibling;
+                    if (btn) {
+                        btn.classList.remove('active'); // Remove active class from other buttons
+                    }
+                }
+            });
+
+            var submoduleContainer = document.getElementById(submoduleId);
+            if (submoduleContainer.style.display === 'block') {
+                submoduleContainer.style.display = 'none';
+                buttonElement.classList.remove('active'); // Remove active class if already open
+            } else {
+                submoduleContainer.style.display = 'block';
+                buttonElement.classList.add('active'); // Add active class to clicked button
+            }
+
+            if (!submoduleContainer.hasChildNodes()) {
+                var submodules;
+                switch (submoduleId) {
+                    case 'departmentsSubmodules':
+                        submodules = ['Cards', 'Knitting', 'Preparatory', 'Spinning 1', 'Spinning 2', 'Winding', 'Spinning 1 Unit-2', 'Spinning 2 Unit-2', 'Winding Unit-2'];
+                        break;
+                    case 'alarmsSubmodules':
+                        submodules = ['High Temperature', 'Low Pressure', 'System Error'];
+                        break;
+                    case 'settingsSubmodules':
+                        submodules = ['Set Point', 'Digital Input', 'Digital Output', 'Analog Input', 'Analog Output', 'Preset Values', 'Timer', 'Controllers', 'UPSS', 'Pump Min Set'];
+                        break;
+                    case 'reportsSubmodules':
+                        submodules = ['Trends', 'Report'];
+                        break;
+                    default:
+                        submodules = [];
+                }
+
+                submodules.forEach(function (submoduleName) {
+                    var btn = document.createElement('button');
+                    btn.className = 'submodule-button';
+                    btn.innerHTML = submoduleName;
+                    btn.onclick = function () {
+                        if (submoduleName === 'Report') {
+                            iframe.style.display = 'block'; // Show the iframe for report
+                            iframe.src = 'http://127.0.0.1:5001/report'; // Set the source URL
+                        }
+                        else if (submoduleName === 'Trends') {
+                            iframe.style.display = 'block'; // Show the iframe for trends
+                            iframe.src = 'http://localhost:3000/'; // Set the source URL
+                        }
+                        else if (submoduleName === 'Spinning 2') {
+                            window.location.href = '/spinning2'; // Redirect to /spinning2
+                        } else {
+                            alert('Clicked on: ' + submoduleName);
+                        }
+
+                        // Change background color of active button
+                        var activeButtons = document.querySelectorAll('.submodule-button.active');
+                        activeButtons.forEach(function (activeButton) {
+                            activeButton.classList.remove('active');
+                        });
+
+                        btn.classList.add('active'); // Add active class to clicked submodule button
+                    };
+
+                    submoduleContainer.appendChild(btn);
+                });
+            }
+        }
+
+        // Update date and time every second
+        // setInterval(function () {
+        //     var now = new Date();
+
+        //     // Format time
+        //     var hours = now.getHours();
+        //     var minutes = String(now.getMinutes()).padStart(2, '0');
+        //     var seconds = String(now.getSeconds()).padStart(2, '0');
+        //     var ampm = hours >= 12 ? 'PM' : 'AM';
+        //     hours = hours % 12; // Convert to 12-hour format
+        //     hours = hours ? String(hours).padStart(2, '0') : '12'; // The hour '0' should be '12'
+        //     var timeString = ${hours}:${minutes}:${seconds} ${ampm};
+
+        //     // Format date
+        //     var day = String(now.getDate()).padStart(2, '0');
+        //     var month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        //     var year = now.getFullYear();
+        //     var dateString = ${day}-${month}-${year};
+
+        //     // Update the elements with new format
+        //     document.getElementById('time').innerText = Time: ${timeString};
+        //     document.getElementById('date').innerText = Date: ${dateString};
+        // }, 1000);
+
+        // Toggle user profile dropdown
+        function toggleProfileDropdown() {
+            var dropdown = document.getElementById('profileDropdown');
+            dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Set the username in the profile dropdown and profile icon
+        var username = "{{ session['username'] }}"; // Assuming you store the username in session
+        // document.getElementById('usernameDisplay').innerText = username;
+
+        // Set the first letter of the username as the profile icon
+        if (username) {
+            document.getElementById('profileIcon').innerText = username.charAt(0).toUpperCase();
+        }
+    </script>
+</body>
+
+</html>

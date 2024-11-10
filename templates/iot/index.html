@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <title>OPC UA Live Data</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+    </head>
+    <body>
+        <h1>Live OPC UA Data</h1>
+        <div id="data"></div>
+        
+        <h2>Write Counter Value</h2>
+        <input type="text" id="counterValue" placeholder="Enter new counter value">
+        <button id="writeButton">Write</button>
+        
+        <script>
+            var socket = io();
+            socket.on('update', function(data) {
+                var display = '';
+                for (var key in data) {
+                    display += key + ": " + data[key] + "<br>";
+                }
+                document.getElementById("data").innerHTML = display;
+            });
+
+            document.getElementById('writeButton').onclick = function() {
+                var value = document.getElementById('counterValue').value;
+                var nodeId = "ns=3;i=1008";
+                fetch('/write', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ node_id: nodeId, value: parseFloat(value) }) // Ensure value is a float
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Log the entire response
+                    alert('Write operation: ' + (data.status || data.error || "Unknown error"));
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            };
+        </script>
+    </body>
+</html>

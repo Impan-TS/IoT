@@ -1,0 +1,6 @@
+Flask
+Flask-SocketIO
+opcua
+Flask-SocketIO opcua
+flask flask-socketio opcua chart.js
+dash

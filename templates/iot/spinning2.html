@@ -1,0 +1,222 @@
+{% extends "iot/tse.html" %}
+
+{% block title %}Spinning 2{% endblock %}
+
+{% block content %}
+<html>
+
+<body style="background-color: #e3f4ff;">
+    <div id="spinning2Div"
+        style="transform: scale(0.8); left:30px; margin-top:20px; top: 5px; left:10px; width: 100%; height: 100%; display: block; position: absolute;">
+
+        <div
+            style="position: absolute; top: 15px; left: 130px; width: 1260px; height: 645px; border: 2px solid #C5C6D0; border-radius: 20px; background-color: white;">
+        </div>
+
+        <img src="{{ url_for('static', filename='images/rdf000.png') }}"
+            style="position:absolute; left:260px; top:280px; width:95px; height:60px;">
+        <img src="{{ url_for('static', filename='images/redline00_x.png') }}"
+            style="position:absolute; left:195px; top:305px; width:65px; height:7px;">
+        <img src="{{ url_for('static', filename='images/sf000.png') }}"
+            style="position:absolute; left:380px; top:518px; width:51px; height:51px; border-radius: 50px; border: 1px solid black;">
+        <img src="{{ url_for('static', filename='images/greenline00_y.png') }}"
+            style="position:absolute; left:305px; top:340px; width:6px; height:203px;">
+        <img src="{{ url_for('static', filename='images/greenline00_x.png') }}"
+            style="position:absolute; left:307px; top:539px; width:73px; height:6px;">
+        <img src="{{ url_for('static', filename='images/icyclone000.jpg') }}"
+            style="position:absolute; left:502px; top:445px; width:80px; height:180px;">
+        <img src="{{ url_for('static', filename='images/greenline00_x.png') }}"
+            style="position:absolute; left:432px; top:539px; width:70px; height:6px;">
+        <img src="{{ url_for('static', filename='images/redline00_x.png') }}"
+            style="position:absolute; left:355px; top:305px; width:90px; height:6px;">
+        <img src="{{ url_for('static', filename='images/fan000.gif') }}"
+            style="position:absolute; left:511px; top:208px; width:42px; height:42px; border-radius: 60px; border: 2.5px solid black; padding:8PX;">
+        <img src="{{ url_for('static', filename='images/fan000.gif') }}"
+            style="position:absolute; left:511px; top:320px; width:42px; height:42px; border-radius: 60px; border: 2.5px solid black; padding:8PX;">
+        <img src="{{ url_for('static', filename='images/redline00_x.png') }}"
+            style="position:absolute; left:440px; top:305px; width:415px; height:6px;">
+        <img src="{{ url_for('static', filename='images/exhaust000.gif') }}"
+            style="position:absolute; left:657px; top:103px; width:45px; height:25px;">
+        <img src="{{ url_for('static', filename='images/intake000.gif') }}"
+            style="position:absolute; left:795px; top:95px; width:35px; height:30px;">
+        <img src="{{ url_for('static', filename='images/redline00_y.png') }}"
+            style="position:absolute; left:678px; top:129px; width:6px; height:175px;">
+        <img src="{{ url_for('static', filename='images/greenline00_y.png') }}"
+            style="position:absolute; left:809px; top:130px; width:6px; height:176px;">
+        <img src="{{ url_for('static', filename='images/airwasher000.png') }}"
+            style="position:absolute; left:900px; top:220px; width:300px; height:230px;">
+        <img src="{{ url_for('static', filename='images/greenline00_x.png') }}"
+            style="position:absolute; left:809px; top:305px; width:135px; height:6px;">
+        <img src="{{ url_for('static', filename='images/blueline00_x.png') }}"
+            style="position:absolute; left:1200px; top:295px; width:104px; height:6px;">
+        <img src="{{ url_for('static', filename='images/fan000.gif') }}"
+            style="position:absolute; left:1273px; top:391px; width:43px; height:43px; border-radius: 60px; border: 2.5px solid black; padding:8PX;">
+        <img src="{{ url_for('static', filename='images/blueline00_y.png') }}"
+            style="position:absolute; left:1302px; top:295px; width:6px; height:97px;">
+        <img src="{{ url_for('static', filename='images/blueline00_y.png') }}"
+            style="position:absolute; left:1302px; top:454px; width:6px; height:85px;">
+        <img src="{{ url_for('static', filename='images/blueline00_y.png') }}"
+            style="position:absolute; left:1253px; top:238px; width:6px; height:63px;">
+        <img src="{{ url_for('static', filename='images/recirculation00.gif') }}"
+            style="position:absolute; left:715px; top:266px; width:78px; height:85px;">
+        <img src="{{ url_for('static', filename='images/circleline000_x.png') }}"
+            style="position:absolute; left:782px; top:130px; width:60px; height:27px; border: 1px solid black; padding: -2px;">
+        <img src="{{ url_for('static', filename='images/circleline000_x.png') }}"
+            style="position:absolute; left:652px; top:128px; width:60px; height:27px; border: 1px solid black; padding: -2px;">
+        <img src="{{ url_for('static', filename='images/circleline000_y.png') }}"
+            style="position:absolute; left:739.5px; top:286px; width:27px; height:44px; border: 1px solid black; padding: -2px;">
+
+        <div style="position:absolute; left:1180px; top:50px; color:#00508a; font-size:30px;"><b><u>Spinning-2</u></b>
+        </div>
+        <p style="position:absolute; left:527px; top:170px; color:black;"><b>Fan</b></p>
+        <p style="position:absolute; left:529px; top:372px; color:black;"><b>Fan</b></p>
+        <p style="position:absolute; left:530px; top:617px; color:black;"><b>Cyclone</b></p>
+        <p style="position:absolute; left:1236px; top:398px; color:black;"><b>Fan</b></p>
+        <p style="position:absolute; left:657px; top:65px; color:black;"><b>Exhaust</b></p>
+        <p style="position:absolute; left:765px; top:62px; color:black;"><b>Fresh Intake</b></p>
+        <p style="position:absolute; left:701px; top:230px; color:black;"><b>Recirculation</b></p>
+        <p style="position:absolute; left:956px; top:447px; color:black;"><b>Air Washer</b></p>
+
+        <img src="{{ url_for('static', filename='images/redarrow00_r.png') }}"
+            style="position:absolute; left:220px; top:299.5px; width:18px; height:19px;">
+        <img src="{{ url_for('static', filename='images/redarrow00_r.png') }}"
+            style="position:absolute; left:450px; top:299.5px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/redarrow00_r.png') }}"
+            style="position:absolute; left:610px; top:299.5px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/redarrow00_r.png') }}"
+            style="position:absolute; left:695px; top:299.5px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/greenarrow00_r.png') }}"
+            style="position:absolute; left:855px; top:299.5px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/greenarrow00_b.png') }}"
+            style="position:absolute; left:300px; top:425px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/greenarrow00_r.png') }}"
+            style="position:absolute; left:458px; top:534px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/bluearrow00_b.png')}}"
+            style="position:absolute; left:1297px; top:340px; width:16px; height:17px;">
+        <img src="{{ url_for('static', filename='images/bluearrow00_b.png') }}"
+            style="position:absolute; left:1297px; top:480px; width:16px; height:17px;">
+
+        <img src="{{ url_for('static', filename='images/reddot0.png') }}"
+            style="position:absolute; left:325px; top:352px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:347px; top:352px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <img src="{{ url_for('static', filename='images/reddot0.png') }}"
+            style="position:absolute; left:367px; top:500px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:346px; top:500px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <img src="{{ url_for('static', filename='images/reddot0.png') }}"
+            style="position:absolute; left:595px; top:445px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:617px; top:445px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <img src="{{ url_for('static', filename='images/reddot0.png') }}"
+            style="position:absolute; left:580px; top:333px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:602px; top:333px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <img src="{{ url_for('static', filename='images/greendot0.png') }}"
+            style="position:absolute; left:578px; top:190px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:600px; top:190px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <img src="{{ url_for('static', filename='images/reddot0.png') }}"
+            style="position:absolute; left:1087px; top:357px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:1109px; top:357px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <img src="{{ url_for('static', filename='images/reddot0.png') }}"
+            style="position:absolute; left:1335px; top:450px; width:20px; height:20px;">
+        <img src="{{ url_for('static', filename='images/yellowdot0.jpg') }}"
+            style="position:absolute; left:1357px; top:450px; width:12.5px; height:12.5px; border: 1px solid rgba(0, 0, 0, 0.5); padding: 3px;">
+
+        <div
+            style="position:absolute; left:1215px; top:526px; border:3px solid skyblue; width:150px; height:90px; border-radius:7px">
+        </div>
+
+        <div
+            style="position:absolute; left:268px; top:248px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="counter">{{ msg.payload['Counter'] }}</span> Pa
+        </div>
+
+        <div
+            style="position:absolute; left:500px; top:280px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="random">{{ msg.payload['Random'] }}</span> %
+        </div>
+
+        <div
+            style="position:absolute; left:1140px; top:355px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="sawtooth">{{ msg.payload['Sawtooth'] }}</span> %
+        </div>
+
+        <div
+            style="position:absolute; left:1205px; top:215px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="sinusoid">{{ msg.payload['Sinusoid'] }}</span> °C
+        </div>
+
+        <div
+            style="position:absolute; left:1220px; top:470px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="square">{{ msg.payload['Square'] }}</span> %
+        </div>
+
+        <div
+            style="position:absolute; left:1282px; top:539px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="triangle">{{ msg.payload['Triangle'] }}</span>
+        </div>
+
+        <div
+            style="position:absolute; left:1282px; top:583px; border:2px solid black; padding:0px 15px 0px 20px; border-radius:5px">
+            <span id="random2">{{ msg.payload['Random'] }}</span>
+        </div>
+
+        <p style="position:absolute; left:1224px; top:533px;"><b>%R.H</b></p>
+        <p style="position:absolute; left:1238px; top:580px;"><b>°C</b></p>
+
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        // Initialize Socket.IO client
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // Function to format numbers
+        function formatValue(value) {
+            let floatValue = parseFloat(value);
+            return floatValue % 1 === 0 ? floatValue.toString() : floatValue.toFixed(2);
+        }
+
+        // Listen for updates from the server
+        socket.on('update', function (data) {
+            document.getElementById('counter').textContent = formatValue(data.Counter);
+            document.getElementById('random').textContent = formatValue(data.Random);
+            document.getElementById('sawtooth').textContent = formatValue(data.Sawtooth);
+            document.getElementById('sinusoid').textContent = formatValue(data.Sinusoid);
+            document.getElementById('square').textContent = formatValue(data.Square);
+            document.getElementById('triangle').textContent = formatValue(data.Triangle);
+            document.getElementById('random2').textContent = formatValue(data.Random);
+        });
+    </script>
+
+    <script>
+        // Get the active submodule variable from the server
+        const activeSubmodule = "{{ active_submodule }}";  // Use Jinja to get the value
+
+        // This function will trigger the submodule toggle
+        function openActiveSubmodule() {
+            const buttonElement = document.querySelector(button[id$ = '${activeSubmodule.replace('Submodules', '')}']);  // Select the module button
+            if (buttonElement) {
+                buttonElement.click();  // Simulate click on the module button to open it
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = function () {
+            openActiveSubmodule();
+        };
+    </script>
+</body>
+
+</html>
+
+{% endblock %}
